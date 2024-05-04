@@ -16,4 +16,5 @@
     <string name="title_activity_songdisplay">songdisplay</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="Username">UserName</string>
 </resources>

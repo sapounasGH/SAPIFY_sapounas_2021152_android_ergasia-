@@ -1,25 +1,20 @@
 package com.example.sapounas22exp;
 
-import android.Manifest;
-
-import android.content.ContentResolver;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.media.MediaPlayer;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.widget.Toast;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.room.Room;
@@ -27,35 +22,43 @@ import android.widget.TextView;
 import com.example.sapounas22exp.R.id;
 import com.example.sapounas22exp.database.MyAppDatabase;
 import com.example.sapounas22exp.database.songs;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.IOException;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE_PERMISSION = 100;
-
-    final static int RQS_PERMISSION_READ_EXTERNAL_STORAGE = 4;
-    private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 5;
     LinearLayout lLayout;
     private DrawerLayout drawerLayout;
     TextView songD;
-    TextView sn, an;
-    private MediaPlayer mediaPlayer;
+    public static TextView  sn, an;
     public static com.example.sapounas22exp.database.MyAppDatabase myAppDatabase;
+    final boolean[] voi = {true};
+    private MediaPlayer mediaPlayer = Mediaplayershare.getInstance();
+    public static int playingnow=-1,playnext=-1,maxid=-1,playprevious=-1;
+    public static ImageButton ppb;
 
+    private NavigationView navigationView;
+
+    public static FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        ppb = findViewById(R.id.PLayPauseb);
         /*edw eiani to Library pou thelw na dhmiourghsw*/
         myAppDatabase = Room.databaseBuilder(getApplicationContext(), MyAppDatabase.class, "SongDBf").allowMainThreadQueries().build();
         List<songs> songsQ = MainActivity.myAppDatabase.myDao().getsongs();
-        String result = "";
         lLayout = findViewById(R.id.Library);
         an = findViewById(id.SongArtactivitymain);
         sn = findViewById(id.Songnameactivitymain);
         for (songs i : songsQ) {
             int code = i.getId();
+            if (maxid<=code){
+                maxid=code;
+            }
             String SongN = i.getSname();
             String SArtistName = i.getSartist();
             String Smp3path = i.getMp3filepath();
@@ -66,36 +69,91 @@ public class MainActivity extends AppCompatActivity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*selectedUri= Uri.parse(Smp3path);*/
-                    PlaySong(SongN, SArtistName, Smp3path);
+                    PlaySong(Smp3path);
+                    playingnow=i.getId();
+                    if (playingnow==maxid){
+                        playnext=0;
+                    }else {playnext=playingnow+1;}
+                    if (playingnow==0){
+                        playprevious=maxid;
+                    }else {playprevious=playingnow-1;}
+                    sn.setText(SongN);
+                    an.setText(SArtistName);
+                    ppb.setImageResource(android.R.drawable.ic_media_pause);
+                    voi[0] = false;
                 }
             });
         }
-        if (checkPermission() == false) {
-            requestPermission();
-        }
-        final RelativeLayout songDisplay = findViewById(R.id.smollSongDisplay);
-        songDisplay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, songdis.class);
-                startActivity(intent);
-            }
-        });
-        final boolean[] voi = {true};
-        final ImageButton ppb = findViewById(R.id.PLayPauseb);
         ppb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (voi[0] == true) {
-                    ppb.setImageResource(android.R.drawable.ic_media_pause);
-                    voi[0] = false;
+                    if ((mediaPlayer!=null)){
+                        mediaPlayer.start();
+                        ppb.setImageResource(android.R.drawable.ic_media_pause);
+                        voi[0] = false;
+                    }
                 } else {
-                    ppb.setImageResource(android.R.drawable.ic_media_play);
-                    voi[0] = true;
+                    if(mediaPlayer.isPlaying()){
+                        mediaPlayer.pause();
+                        ppb.setImageResource(android.R.drawable.ic_media_play);
+                        voi[0] = true;
+                    }
                 }
             }
         });
+
+        ImageButton pps = findViewById(R.id.playprevious);
+        ImageButton pns = findViewById(R.id.playnext);
+        final songs[] whattoplay = {new songs()};
+        List<songs> songsQ2 = MainActivity.myAppDatabase.myDao().getsongs();
+        pns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer!=null){
+                    for (songs k : songsQ2) {
+                        if (k.getId() == playnext) {
+                            whattoplay[0] = k;
+                            break;
+                        }
+                    }
+                    sn.setText(whattoplay[0].getSname());
+                    an.setText(whattoplay[0].getSartist());
+                    PlaySong(whattoplay[0].getMp3filepath());
+                    playingnow=whattoplay[0].getId();
+                    if (playingnow==maxid){
+                        playnext=0;
+                    }else {playnext=playingnow+1;}
+                    if (playingnow==0){
+                        playprevious=maxid;
+                    }else {playprevious=playingnow-1;}
+                }
+            }
+        });
+        pps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer!=null){
+                    for (songs k : songsQ2) {
+                        if (k.getId() == playprevious) {
+                            whattoplay[0] = k;
+                            break;
+                        }
+                    }
+                    sn.setText(whattoplay[0].getSname());
+                    an.setText(whattoplay[0].getSartist());
+                    PlaySong(whattoplay[0].getMp3filepath());
+                    playingnow=whattoplay[0].getId();
+                    if (playingnow==maxid){
+                        playnext=0;
+                    }else {playnext=playingnow+1;}
+                    if (playingnow==0){
+                        playprevious=maxid;
+                    }else {playprevious=playingnow-1;}
+                }
+            }
+        });
+
         ImageButton addsongg = findViewById(R.id.addsong);
         addsongg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,62 +172,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final RelativeLayout songDisplay = findViewById(R.id.smollSongDisplay);
+        songDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, songdis.class);
+                intent.putExtra("songname", sn.getText());
+                intent.putExtra("artistname", an.getText());
+                intent.putExtra("playingnow", playingnow);
+                intent.putExtra("playnext",playnext);
+                intent.putExtra("playprev", playprevious);
+                startActivity(intent);
+            }
+        });
+
+        navigationView = findViewById(id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id =menuItem.getItemId();
+                if (id == R.id.lib) {
+                } else if (id == R.id.acc) {
+                    login lf = new login();
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, lf).addToBackStack(null).commit();
+                    drawerLayout.closeDrawers();
+                } else if (id == R.id.createacc) {
+                    CreateAccount lf = new CreateAccount();
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, lf).addToBackStack(null).commit();
+                    drawerLayout.closeDrawers();
+                }
+                return true;
+            }
+        });
+
+
     }
 
-    public void PlaySong(String SongN, String SArtistName, String Smp3path) {
-        Uri uri = Uri.parse(Smp3path);
-        String filePath = null;
-        String[] projection = {MediaStore.Audio.Media.DATA};
-        ContentResolver resolver = getContentResolver();
-        Cursor cursor = resolver.query(uri, projection, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            int columnIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DATA);
-            filePath = cursor.getString(columnIndex);
-            cursor.close();
+    public void PlaySong(String Smp3path) {
+        if(mediaPlayer != null){
+            mediaPlayer.reset();
         }
-        mediaPlayer = new MediaPlayer();
         try {
-            mediaPlayer.setDataSource(filePath);
+            mediaPlayer.setDataSource(Smp3path);
             mediaPlayer.prepare();
-            mediaPlayer.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-    }
-
-    boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    void requestPermission() {
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        }
+        mediaPlayer.start();
     }
 }

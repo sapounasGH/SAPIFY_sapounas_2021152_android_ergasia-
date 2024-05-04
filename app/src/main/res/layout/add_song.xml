@@ -8,18 +8,14 @@
     android:id="@+id/adsong"
     tools:context=".Add_song"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="@color/blackgrey"
+    android:padding="15dp"
     >
-
-<FrameLayout android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
     <EditText
         android:id="@+id/idET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="ID"
         android:minHeight="48dp"
         />
 
@@ -30,7 +26,7 @@
         android:ems="10"
         android:hint="Song"
         android:minHeight="48dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         />
 
     <EditText
@@ -40,32 +36,30 @@
         android:ems="10"
         android:hint="Artist"
         android:minHeight="48dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         />
 
     <Button
         android:id="@+id/mp3path"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="10dp"
         android:text="Insert Mp3 File"
         />
+
     <Button
         android:id="@+id/addbt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:text="Add"
-        />
+        android:layout_marginTop="20dp"
+        android:text="Add" />
 
     <Button
         android:id="@+id/deletebt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:text="Delete"
-        />
+        android:layout_marginTop="25dp"
+        android:text="Delete" />
 
-</FrameLayout>
 
 </LinearLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "41083988831",
+    "project_id": "sapify-f5589",
+    "storage_bucket": "sapify-f5589.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41083988831:android:d1748171b0db1fa25424ea",
+        "android_client_info": {
+          "package_name": "com.example.sapounas22exp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMh0cyQJ6tfZf9-BwT4gaPvUaYLTxkcMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

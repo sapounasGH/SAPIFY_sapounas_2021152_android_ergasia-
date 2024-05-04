@@ -51,13 +51,14 @@
 
             <ImageButton
                 android:id="@+id/addsong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="45dp"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
                 android:layout_toRightOf="@id/sapifylogo"
+                android:background="@null"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@android:drawable/stat_sys_upload" />
+                app:srcCompat="@drawable/baseline_control_point_duplicate_24" />
 
             <RelativeLayout
                 android:id="@+id/smollSongDisplay"
@@ -80,7 +81,7 @@
                     />
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/playnext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -92,7 +93,7 @@
                     />
 
                 <ImageButton
-                    android:id="@+id/imageButton3"
+                    android:id="@+id/playprevious"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="140dp"
@@ -120,7 +121,7 @@
                     android:layout_marginStart="37dp"
                     android:layout_marginTop="30dp"
                     android:layout_toEndOf="@+id/imageView"
-                    android:text="Song Name" />
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/SongArtactivitymain"
@@ -131,7 +132,7 @@
                     android:layout_marginLeft="150dp"
                     android:layout_marginTop="5dp"
                     android:layout_toEndOf="@+id/imageView"
-                    android:text="Artist NAME" />
+                    android:text="" />
             </RelativeLayout>
 
             <LinearLayout

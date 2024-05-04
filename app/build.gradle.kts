@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -8,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.sapounas22exp"
-        minSdk = 24
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -35,7 +36,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -45,8 +45,11 @@ dependencies {
     implementation(libs.annotation)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     annotationProcessor(libs.room.compiler)
+    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation("com.google.firebase:firebase-analytics")
 }

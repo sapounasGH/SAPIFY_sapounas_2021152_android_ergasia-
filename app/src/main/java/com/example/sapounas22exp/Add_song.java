@@ -1,9 +1,18 @@
 package com.example.sapounas22exp;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
+import android.content.Intent;import android.net.Uri;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.widget.Toast;
+import android.database.Cursor;
+import android.content.ContentResolver;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +21,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.Fragment;
 
 import com.example.sapounas22exp.database.songs;
+
+
+import java.io.File;
 
 public class Add_song extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -23,10 +36,9 @@ public class Add_song extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private static final int REQUEST_CODE_PICK_MP3 = 123;
+    private static final int REQUEST_CODE_OPEN_FILE = 123;
 
-    String songmp3path="";
-
+    String namethefile="";
     public Add_song() {
     }
     public static Add_song newInstance(String param1, String param2) {
@@ -48,6 +60,7 @@ public class Add_song extends Fragment {
     }
     EditText editText1,editText2,editText3;
     Button submit,delete;
+    songs song = new songs();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -76,12 +89,9 @@ public class Add_song extends Fragment {
                 }
                 String songname = editText2.getText().toString();
                 String songartist = editText3.getText().toString();
-                songs song = new songs();
                 song.setId(songid);
                 song.setSname(songname);
                 song.setSartist(songartist);
-
-                song.setMp3filepath(songmp3path);
                 MainActivity.myAppDatabase.myDao().addSong(song);
                 Toast.makeText(getActivity(),"Your song has been saved :) ",Toast.LENGTH_LONG).show();
                 editText1.setText("");
@@ -110,24 +120,22 @@ public class Add_song extends Fragment {
         });
         return view;
     }
-
+/*edw epilegei o xrhsths to file kai to location toy mpainei sto room database*/
     private void pickfile() {
-
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("audio/*");
-        startActivityForResult(intent, REQUEST_CODE_PICK_MP3);
-
+        intent.setType("audio/mpeg");
+        startActivityForResult(intent, REQUEST_CODE_OPEN_FILE);
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data ){
         super.onActivityResult(requestCode,resultCode,data);
-        if (requestCode==REQUEST_CODE_PICK_MP3 && resultCode == Activity.RESULT_OK){
-            if(data != null){
-                Uri uri=data.getData();
-                if (uri != null){
-                    songmp3path= uri.toString();
-                }else {Toast.makeText(getActivity(),"to data einai null ",Toast.LENGTH_LONG).show();}
+        if (requestCode==REQUEST_CODE_OPEN_FILE && resultCode == Activity.RESULT_OK){
+            if(data != null && data.getData() != null){
+                String fileloc=data.getData().toString();
+                Uri uri = Uri.parse(fileloc);
+                namethefile = editText2.getText().toString(); /*prepei na kaneis na prosthetei arithmo*/
+                song.setMp3filepath(FileManager.saveuriTointernalStorage(getContext(), uri, namethefile+".mp3"));
             }
 
         }
