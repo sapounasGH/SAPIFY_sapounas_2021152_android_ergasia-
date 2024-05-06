@@ -1,35 +1,17 @@
 package com.example.sapounas22exp;
 
 public class FireBaseUser {
-    private String Username;
-    private String Surrname;
-    private String Password;
-    private  String Musitaste;
+
     private String avatar;
+    private  String Musitaste;
     private String Name;
+    private String Password;
+    private String Surrname;
+    private String Username;
 
-    public String getUsername() {
-        return Username;
-    }
-
-    public String getPassWord() {
-        return Password;
-    }
-
-    public String getMusicTaste() {
-        return Musitaste;
-    }
 
     public void setUsername(String username) {
         Username = username;
-    }
-
-    public void setPassWord(String passWord) {
-        Password = passWord;
-    }
-
-    public String getSurrname() {
-        return Surrname;
     }
 
     public void setSurrname(String surrname) {
@@ -47,6 +29,21 @@ public class FireBaseUser {
     public void setName(String name) {
         Name = name;
     }
+    public String getName() {
+        return Name;
+    }
+
+    public String getMusitaste() {
+        return Musitaste;
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public String getSurrname() {
+        return Surrname;
+    }
 
     public String getPassword() {
         return Password;
@@ -56,12 +53,8 @@ public class FireBaseUser {
         return avatar;
     }
 
-    public String getName() {
-        return Name;
-    }
-
-    public void setMusicTaste(String musicTaste) {
-        Musitaste = musicTaste;
+    public void setMusitaste(String musitaste) {
+        Musitaste = musitaste;
     }
 }
 

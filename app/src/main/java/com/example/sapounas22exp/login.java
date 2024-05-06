@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,6 +78,8 @@ public class login extends Fragment {
 
     }
     EditText ed1,ed2;
+    boolean flag=false;
+    String documentPath=null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -86,28 +89,7 @@ public class login extends Fragment {
         ed2 = view.findViewById(R.id.password);
         Button btn = view.findViewById(R.id.login);
         db= FirebaseFirestore.getInstance();
-        db.collection("Users").document("22").get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            username = documentSnapshot.getString("Username");
-                            password = documentSnapshot.getString("Password");
-                            music_taste= documentSnapshot.getString("Musitaste");
-                            Name= documentSnapshot.getString("Name");
-                            Surrname= documentSnapshot.getString("Surrname");
-                            avatar= documentSnapshot.getString("avatar");
-                        } else {
-                            Log.d(TAG, "Document does not exist");
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d(TAG, "Error getting document", e);
-                    }
-                });
+
 
         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
@@ -121,23 +103,78 @@ public class login extends Fragment {
             public void onClick(View v) {
                 String usr = ed1.getText().toString();
                 String pass = ed2.getText().toString();
-                if (usr.equals(username) && pass.equals(password)){
-                    Toast.makeText(getActivity(),"You are logged in ! ",Toast.LENGTH_LONG).show();
-                    textView1.setText("Name:  "+Name);
-                    textView2.setText("Surrname:  "+Surrname);
-                    textView3.setText("Username:  "+username);
-                    textView4.setText("Music Taste:  "+music_taste);
-                    if(avatar.equals("rihana")){
-                        imageView.setImageResource(R.drawable.rihana);
-                    }
-                    MenuItem menuItem = navigationView.getMenu().findItem(R.id.acc);
-                    menuItem.setEnabled(false);
-                }else {
-                    Toast.makeText(getActivity(),"wrong username or password",Toast.LENGTH_LONG).show();
-                }
+                    db.collection("Users")
+                            .whereEqualTo("username", usr)
+                            .get()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                        db.collection("Users")
+                                                .whereEqualTo("password", pass)
+                                                .get()
+                                                .addOnCompleteListener(task2 -> {
+                                                    if (task2.isSuccessful()) {
+                                                        for (QueryDocumentSnapshot document2 : task2.getResult()) {
+                                                            documentPath = document2.getId();
+                                                            Log.d(TAG, documentPath);
+                                                            db.collection("Users").document(""+documentPath).get()
+                                                                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                        @Override
+                                                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                            if (documentSnapshot.exists()) {
+                                                                                username = documentSnapshot.getString("username");
+                                                                                password = documentSnapshot.getString("password");
+                                                                                music_taste= documentSnapshot.getString("musitaste");
+                                                                                Name= documentSnapshot.getString("name");
+                                                                                Surrname= documentSnapshot.getString("surrname");
+                                                                                avatar= documentSnapshot.getString("avatar");
+
+                                                                                Toast.makeText(getActivity(),"You are logged in!",Toast.LENGTH_LONG).show();
+                                                                                textView1.setText("Name: " + Name);
+                                                                                textView2.setText("Surrname: "+Surrname);
+                                                                                textView3.setText("Username: "+username);
+                                                                                textView4.setText("MusicTaste: "+music_taste);
+                                                                                if(avatar.equals("Rihana")){
+                                                                                    imageView.setImageResource(R.drawable.rihana);
+                                                                                }else if(avatar.equals("Kanye")){
+                                                                                    imageView.setImageResource(R.drawable.kanye);
+                                                                                }
+                                                                                else if(avatar.equals("EdSherean")){
+                                                                                    imageView.setImageResource(R.drawable.edshe);
+                                                                                }
+                                                                                else if(avatar.equals("Adele")){
+                                                                                    imageView.setImageResource(R.drawable.adele);
+                                                                                }
+                                                                                MenuItem menuItem=navigationView.getMenu().findItem(R.id.acc);
+                                                                                menuItem.setEnabled(false);
+                                                                            } else {
+                                                                                Log.d(TAG, "Document does not exist");
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                    .addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Log.d(TAG, "Error getting document", e);
+                                                                        }
+                                                                    });
+
+
+                                                            break;
+                                                        }
+                                                    } else {
+                                                        Log.d(TAG, "Error getting documents: ", task2.getException());
+                                                    }
+                                                });
+                                        break;
+                                    }
+                                } else {
+                                    Log.d(TAG, "Error getting documents: ", task.getException());
+                                }
+                            });
             }
         });
-
     return view;
     }
 }

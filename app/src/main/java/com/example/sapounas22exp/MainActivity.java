@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private NavigationView navigationView;
 
-    public static FirebaseFirestore db;
+    public static FirebaseFirestore firestoreDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -192,6 +192,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id =menuItem.getItemId();
                 if (id == R.id.lib) {
+                            Intent intent = new Intent(MainActivity.this, LibraryOfSongs.class);
+                            startActivity(intent);
                 } else if (id == R.id.acc) {
                     login lf = new login();
                     getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, lf).addToBackStack(null).commit();

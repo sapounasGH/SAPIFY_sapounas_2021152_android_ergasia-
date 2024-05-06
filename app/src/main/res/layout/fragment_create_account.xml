@@ -90,7 +90,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/kan"
+        android:id="@+id/i1"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
@@ -100,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
-        android:id="@+id/adel"
+        android:id="@+id/i2"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
@@ -110,33 +110,75 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
-        android:id="@+id/es"
+        android:id="@+id/i3"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/edshe"
-        android:layout_marginTop="150dp"
         android:layout_marginLeft="60dp"
+        android:layout_marginTop="180dp"
+        android:src="@drawable/edshe"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/i4"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/rihana"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="180dp"
         android:layout_marginRight="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
+        android:id="@+id/createaccBUTTON"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="350dp"
         android:text="Create Acccount!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/kan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kanye"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        android:layout_marginLeft="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/i1" />
+
+    <Button
+        android:id="@+id/adel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adele"
+        android:layout_marginRight="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/i2" />
+
+    <Button
+        android:id="@+id/es"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="Ed Sheeran"
+        android:layout_marginLeft="70dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/i3" />
+
+    <Button
+        android:id="@+id/riri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rihanna"
+        android:layout_marginRight="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/i4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
