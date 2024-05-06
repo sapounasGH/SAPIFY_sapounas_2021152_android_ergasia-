@@ -12,4 +12,10 @@
         android:id="@+id/createacc"
         android:title="Create Account"/>
 
+    <item
+        android:id="@+id/Search"
+        android:title="Search"
+        android:enabled="false"
+        />
+
 </menu>

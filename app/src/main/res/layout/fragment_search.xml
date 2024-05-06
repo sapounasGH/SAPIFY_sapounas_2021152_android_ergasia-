@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".search"
+    >
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="500dp"
+        tools:context=".search"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/blackgrey"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        >
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="These are the people with the same music taste as YOU!!!!"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        />
+
+        <TextView
+            android:id="@+id/querryresult"
+            android:layout_width="match_parent"
+            android:layout_height="215dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            />
+
+    </LinearLayout>
+</FrameLayout>

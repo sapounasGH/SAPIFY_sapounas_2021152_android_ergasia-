@@ -10,72 +10,70 @@
     >
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kanye Songs"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/blackgrey"
-        android:layout_marginLeft="2dp"
-        android:textColor="@color/white"
         android:id="@+id/getK"
-        />
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/getF"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/blackgrey"
+        android:text="Kanye Songs"
+        android:textColor="@color/white" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:text="Features"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
         android:backgroundTint="@color/blackgrey"
         android:textColor="@color/white"
         android:id="@+id/getF"
         />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="2dp"
-        android:text="First 5 Songs"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/blackgrey"
-        android:textColor="@color/white"
         android:id="@+id/get5"
-        />
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/getF"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/blackgrey"
+        android:text="First 5 Songs"
+        android:textColor="@color/white" />
 
     <LinearLayout
-        android:layout_width="440dp"
-        android:layout_height="690dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_width="680dp"
+        android:layout_height="320dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/rounded"
-        android:backgroundTint="@color/blackgrey"
-        >
+        android:backgroundTint="@color/blackgrey">
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/Library2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/Library2"
                 android:orientation="vertical" />
 
         </ScrollView>
     </LinearLayout>
     <RelativeLayout
-        android:id="@+id/LibrarySongDisplay"
         android:layout_width="400dp"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="800dp"
+        android:layout_marginTop="350dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/blackgrey"
         >
 
         <ImageView
-            android:layout_width="80dp"
+            android:layout_width="50dp"
             android:layout_height="80dp"
             app:srcCompat="@mipmap/musicphoto"/>
         <TextView
@@ -85,7 +83,7 @@
             android:text=""
             android:textColor="@color/white"
             android:layout_marginLeft="100dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="3dp"
             />
 
         <TextView
@@ -95,7 +93,7 @@
             android:text=""
             android:textColor="@color/white"
             android:layout_marginLeft="100dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="23dp"
             />
 
         <ImageButton
@@ -105,7 +103,7 @@
             app:srcCompat="@android:drawable/ic_media_play"
             android:background="@null"
             android:layout_marginLeft="350dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             />
 
     </RelativeLayout>

@@ -42,7 +42,12 @@ public class login extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    String username, password, music_taste,Name,Surrname,avatar;
+    static String username;
+    String password;
+    static String music_taste;
+    String Name;
+    String Surrname;
+    String avatar;
 
 
 
@@ -129,7 +134,6 @@ public class login extends Fragment {
                                                                                 Name= documentSnapshot.getString("name");
                                                                                 Surrname= documentSnapshot.getString("surrname");
                                                                                 avatar= documentSnapshot.getString("avatar");
-
                                                                                 Toast.makeText(getActivity(),"You are logged in!",Toast.LENGTH_LONG).show();
                                                                                 textView1.setText("Name: " + Name);
                                                                                 textView2.setText("Surrname: "+Surrname);
@@ -146,8 +150,10 @@ public class login extends Fragment {
                                                                                 else if(avatar.equals("Adele")){
                                                                                     imageView.setImageResource(R.drawable.adele);
                                                                                 }
-                                                                                MenuItem menuItem=navigationView.getMenu().findItem(R.id.acc);
-                                                                                menuItem.setEnabled(false);
+                                                                                MenuItem menuItem1=navigationView.getMenu().findItem(R.id.acc);
+                                                                                menuItem1.setEnabled(false);
+                                                                                MenuItem menuItem2=navigationView.getMenu().findItem(R.id.Search);
+                                                                                menuItem2.setEnabled(true);
                                                                             } else {
                                                                                 Log.d(TAG, "Document does not exist");
                                                                             }
@@ -164,13 +170,13 @@ public class login extends Fragment {
                                                             break;
                                                         }
                                                     } else {
-                                                        Log.d(TAG, "Error getting documents: ", task2.getException());
+                                                        Toast.makeText(getActivity(),"Wrong Password :(",Toast.LENGTH_LONG).show();
                                                     }
                                                 });
                                         break;
                                     }
                                 } else {
-                                    Log.d(TAG, "Error getting documents: ", task.getException());
+                                    Toast.makeText(getActivity(),"Wrong Username or Password :(",Toast.LENGTH_LONG).show();
                                 }
                             });
             }

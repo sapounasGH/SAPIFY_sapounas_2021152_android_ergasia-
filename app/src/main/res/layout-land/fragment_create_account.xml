@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="400dp"
-    android:layout_height="900dp"
+    android:layout_width="900dp"
+    android:layout_height="400dp"
     tools:context=".CreateAccount"
     android:orientation="vertical"
     android:gravity="center"
@@ -21,17 +21,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         />
 
     <EditText
         android:id="@+id/Nameinput"
         android:layout_width="317dp"
         android:layout_height="50dp"
-        android:layout_marginTop="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="30dp"
+
         android:hint="Name"
         />
 
@@ -39,10 +40,10 @@
         android:id="@+id/Surrnameinput"
         android:layout_width="317dp"
         android:layout_height="50dp"
-        android:layout_marginTop="150dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/Nameinput"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
         android:hint="Surrname"
         />
 
@@ -50,21 +51,22 @@
         android:id="@+id/musicinput"
         android:layout_width="317dp"
         android:layout_height="50dp"
-        android:layout_marginTop="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/Surrnameinput"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
         android:hint="Tell Us Your Music Taste!"
+
         />
 
     <EditText
         android:id="@+id/Usernameinput"
         android:layout_width="317dp"
         android:layout_height="50dp"
-        android:layout_marginTop="250dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/musicinput"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
         android:hint="Your Username"
         />
 
@@ -72,11 +74,11 @@
         android:id="@+id/passwordinput"
         android:layout_width="317dp"
         android:layout_height="50dp"
-        android:layout_marginTop="300dp"
-        android:hint="Your Password"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/Usernameinput"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:hint="Your Password"
         tools:ignore="MissingConstraints"
         />
 
@@ -85,21 +87,21 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="624dp"
+        android:layout_marginTop="8dp"
         android:text="Pick Your Avatar!"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordinput"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/i1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="504dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/kanye"
-        android:layout_marginLeft="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -107,9 +109,9 @@
         android:id="@+id/i2"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="68dp"
         android:src="@drawable/adele"
-        android:layout_marginRight="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -117,8 +119,8 @@
         android:id="@+id/i3"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginStart="504dp"
+        android:layout_marginTop="160dp"
         android:src="@drawable/edshe"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -127,9 +129,9 @@
         android:id="@+id/i4"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="68dp"
         android:src="@drawable/rihana"
-        android:layout_marginTop="180dp"
-        android:layout_marginRight="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -147,9 +149,11 @@
         android:id="@+id/kan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="4dp"
         android:text="Kanye"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
-        android:layout_marginLeft="70dp"
+        app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/i1" />
 
@@ -157,9 +161,11 @@
         android:id="@+id/adel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adele"
+        android:layout_marginTop="4dp"
         android:layout_marginRight="70dp"
+        android:text="Adele"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/i2" />
 
@@ -167,10 +173,11 @@
         android:id="@+id/es"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:text="Ed Sheeran"
         android:layout_marginLeft="70dp"
+        android:layout_marginTop="8dp"
+        android:text="Ed Sheeran"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/i3" />
 
@@ -178,9 +185,11 @@
         android:id="@+id/riri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rihanna"
+        android:layout_marginTop="4dp"
         android:layout_marginRight="70dp"
+        android:text="Rihanna"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/i4" />
 

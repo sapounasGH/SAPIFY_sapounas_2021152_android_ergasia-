@@ -2,8 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="400dp"
-    android:layout_height="700dp"
+    android:layout_width="800dp"
+    android:layout_height="400dp"
     android:layout_gravity="center"
     android:id="@+id/adsong"
     tools:context=".Add_song"
@@ -16,38 +16,34 @@
 
     <EditText
         android:id="@+id/idET"
-        android:layout_width="match_parent"
+        android:layout_width="351dp"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/songnameET"
-        android:layout_width="match_parent"
+        android:layout_width="351dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:hint="Song"
-        android:minHeight="48dp"
-        android:layout_marginTop="5dp"
-        />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/aristET"
-        android:layout_width="match_parent"
+        android:layout_width="353dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Artist"
-        android:minHeight="48dp"
-        android:layout_marginTop="10dp"
-        />
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/mp3path"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Insert Mp3 File"
-        />
+        android:text="Insert Mp3 File" />
 
     <Button
         android:id="@+id/addbt"

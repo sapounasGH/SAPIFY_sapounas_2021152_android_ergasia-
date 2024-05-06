@@ -193,6 +193,8 @@ public class MainActivity extends AppCompatActivity {
                 int id =menuItem.getItemId();
                 if (id == R.id.lib) {
                             Intent intent = new Intent(MainActivity.this, LibraryOfSongs.class);
+                            intent.putExtra("songname", sn.getText());
+                            intent.putExtra("artistname", an.getText());
                             startActivity(intent);
                 } else if (id == R.id.acc) {
                     login lf = new login();
@@ -200,6 +202,10 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                 } else if (id == R.id.createacc) {
                     CreateAccount lf = new CreateAccount();
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, lf).addToBackStack(null).commit();
+                    drawerLayout.closeDrawers();
+                } else if (id == R.id.Search) {
+                    search lf = new search();
                     getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, lf).addToBackStack(null).commit();
                     drawerLayout.closeDrawers();
                 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ssdis"
+    android:background="@color/blackgrey"
+    tools:context=".songdis"
+    android:fitsSystemWindows="true"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/sapifylogo"
+            android:layout_width="302dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher_foreground"
+            android:layout_centerHorizontal="true"
+            />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="50dp"
+            app:srcCompat="@mipmap/musicphoto"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="68dp" />
+
+        <ImageButton
+            android:id="@+id/PLayPauseb2"
+            android:layout_width="68dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="290dp"
+            android:layout_toEndOf="@+id/prev"
+            app:srcCompat="@android:drawable/ic_media_play" />
+
+        <ImageButton
+            android:id="@+id/prev"
+            android:layout_width="68dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="290dp"
+            android:layout_toEndOf="@+id/imageView3"
+            android:src="@android:drawable/ic_media_previous" />
+
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="68dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="290dp"
+            android:layout_toEndOf="@+id/PLayPauseb2"
+            android:src="@android:drawable/ic_media_next" />
+
+        <TextView
+            android:id="@+id/songN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="156dp"
+            android:layout_toEndOf="@+id/imageView3"
+            android:text="TextView"
+            android:textColor="@color/white"
+
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/songA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="60dp"
+            android:layout_toEndOf="@+id/imageView3"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_marginTop="200dp"
+            />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="613dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="250dp"
+            android:layout_toEndOf="@+id/imageView3"
+            android:maxHeight="3dp"
+            android:minHeight="3dp"
+            android:secondaryProgressTint="@color/darkishpurple"
+            android:thumbTint="@color/white" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

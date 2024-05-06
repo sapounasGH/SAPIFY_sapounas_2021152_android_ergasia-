@@ -17,4 +17,12 @@ public interface MyDao {
 
     @Delete
     public void deleteSong(songs songs);
+    @Query("SELECT * FROM song WHERE song_artist LIKE 'Kanye West%'")
+    public List<songs> getKanyeWestSongs();
+
+    @Query("SELECT * FROM song WHERE id <5")
+    public List<songs> getfirst();
+
+    @Query("SELECT * FROM song WHERE song_artist LIKE '%Ft.%'")
+    public List<songs> getFeature();
 }
