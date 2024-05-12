@@ -173,7 +173,6 @@ public class songdis extends AppCompatActivity {
             }
         });
         updateSeekbar();
-
     }
 
     public void PlaySong(String Smp3path) {

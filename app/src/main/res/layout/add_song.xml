@@ -13,12 +13,25 @@
     android:backgroundTint="@color/blackgrey"
     android:padding="15dp"
     >
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add your song here!"
+        android:layout_marginBottom="100dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:gravity="center"
+        />
 
     <EditText
         android:id="@+id/idET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
+        android:background="@drawable/roundedtxt"
+        android:paddingStart="20dp"
+        android:hint="id"
         />
 
     <EditText
@@ -29,6 +42,8 @@
         android:hint="Song"
         android:minHeight="48dp"
         android:layout_marginTop="5dp"
+        android:background="@drawable/roundedtxt"
+        android:paddingStart="20dp"
         />
 
     <EditText
@@ -39,6 +54,8 @@
         android:hint="Artist"
         android:minHeight="48dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/roundedtxt"
+        android:paddingStart="20dp"
         />
 
     <Button
@@ -47,6 +64,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Insert Mp3 File"
+        android:backgroundTint="@color/bckpurple"
+        android:textColor="@color/white"
         />
 
     <Button
@@ -54,14 +73,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Add" />
+        android:text="Add"
+        android:backgroundTint="@color/bckpurple"
+        android:textColor="@color/white"
+        />
 
     <Button
         android:id="@+id/deletebt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Delete" />
+        android:text="Delete"
+        android:backgroundTint="@color/bckpurple"
+        android:textColor="@color/white"
+        />
+
+
 
 
 </LinearLayout>

@@ -110,8 +110,7 @@ public class Add_song extends Fragment {
                 song.setSname(songname);
                 song.setSartist(songartist);
                 MainActivity.myAppDatabase.myDao().addSong(song);
-                Toast.makeText(getActivity(), "Your song has been saved :) ", Toast.LENGTH_LONG).show();
-                displayNotification();
+                displayNotification("Song Added","Your song has been succesfully added to your Library");
                 editText1.setText("");
                 editText2.setText("");
                 editText3.setText("");
@@ -130,7 +129,7 @@ public class Add_song extends Fragment {
                 songs song = new songs();
                 song.setId(Var_songid);
                 MainActivity.myAppDatabase.myDao().deleteSong(song);
-                Toast.makeText(getActivity(), "Song deleted ", Toast.LENGTH_LONG).show();
+                displayNotification("Song Deleted","Your song has been succesfully deleted from your Library");
                 editText1.setText("");
                 editText2.setText("");
                 editText3.setText("");
@@ -168,27 +167,18 @@ public class Add_song extends Fragment {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
-
             NotificationManager notificationManager = requireContext().getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
 
-    private void displayNotification() {
+    private void displayNotification(String ct, String ctx) {
         if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             ActivityCompat.requestPermissions(requireActivity(),
                     new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
                     MY_PERMISSIONS_REQUEST_NOTIFICATION);
             return;
         }
-
         Intent intent = new Intent(requireContext(), MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 requireContext(),
@@ -199,8 +189,8 @@ public class Add_song extends Fragment {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Song added")
-                .setContentText("Your song has been successfully added to your library")
+                .setContentTitle(ct)
+                .setContentText(ctx)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 

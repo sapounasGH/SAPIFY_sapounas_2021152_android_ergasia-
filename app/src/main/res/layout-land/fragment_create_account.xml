@@ -32,8 +32,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="30dp"
-
+        android:background="@drawable/roundedtxt"
         android:hint="Name"
+        android:paddingStart="20dp"
         />
 
     <EditText
@@ -45,6 +46,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:hint="Surrname"
+        android:background="@drawable/roundedtxt"
+        android:paddingStart="20dp"
         />
 
     <EditText
@@ -56,7 +59,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:hint="Tell Us Your Music Taste!"
-
+        android:background="@drawable/roundedtxt"
+        android:paddingStart="20dp"
         />
 
     <EditText
@@ -68,6 +72,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:hint="Your Username"
+        android:background="@drawable/roundedtxt"
+        android:paddingStart="20dp"
         />
 
     <EditText
@@ -80,6 +86,8 @@
         android:layout_marginLeft="30dp"
         android:hint="Your Password"
         tools:ignore="MissingConstraints"
+        android:background="@drawable/roundedtxt"
+        android:paddingStart="20dp"
         />
 
 
@@ -93,7 +101,8 @@
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        />
 
     <ImageView
         android:id="@+id/i1"
@@ -139,9 +148,11 @@
         android:id="@+id/createaccBUTTON"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
-        android:text="Create Acccount!"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/bckpurple"
+        android:text="Create"
+        android:textColor="@color/white"
+        android:layout_marginLeft="385dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -155,7 +166,10 @@
         app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/i1" />
+        app:layout_constraintTop_toBottomOf="@+id/i1"
+        android:backgroundTint="@color/bckpurple"
+        android:textColor="@color/white"
+        />
 
     <Button
         android:id="@+id/adel"
@@ -167,7 +181,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/i2" />
+        app:layout_constraintTop_toBottomOf="@+id/i2"
+        android:backgroundTint="@color/bckpurple"
+        android:textColor="@color/white"
+        />
 
     <Button
         android:id="@+id/es"
@@ -179,7 +196,10 @@
         app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/i3" />
+        app:layout_constraintTop_toBottomOf="@+id/i3"
+        android:backgroundTint="@color/bckpurple"
+        android:textColor="@color/white"
+        />
 
     <Button
         android:id="@+id/riri"
@@ -191,7 +211,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/i4" />
+        app:layout_constraintTop_toBottomOf="@+id/i4"
+        android:backgroundTint="@color/bckpurple"
+        android:textColor="@color/white"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

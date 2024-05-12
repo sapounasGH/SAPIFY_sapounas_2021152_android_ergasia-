@@ -28,7 +28,9 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/roundedtxt"
+        />
 
     <EditText
         android:id="@+id/password"
@@ -41,7 +43,9 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        android:background="@drawable/roundedtxt"
+        />
 
     <Button
         android:id="@+id/login"
@@ -57,6 +61,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.2"
+        android:backgroundTint="@color/bckpurple"
+        android:textColor="@color/white"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
