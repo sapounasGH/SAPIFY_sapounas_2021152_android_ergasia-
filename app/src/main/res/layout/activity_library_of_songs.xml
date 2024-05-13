@@ -44,32 +44,43 @@
         />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="440dp"
         android:layout_height="690dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:background="@drawable/rounded"
-        android:backgroundTint="@color/blackgrey"
-        >
+        android:backgroundTint="@color/blackgrey">
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/Library2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/Library2"
                 android:orientation="vertical" />
 
         </ScrollView>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="770dp"
+        android:backgroundTint="@color/blackgrey"
+        android:textColor="@color/white"
+        android:text="Show history" />
+
     <RelativeLayout
         android:id="@+id/LibrarySongDisplay"
         android:layout_width="400dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="800dp"
+        android:layout_marginTop="820dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/blackgrey"
         >
@@ -109,4 +120,6 @@
             />
 
     </RelativeLayout>
+
+
 </RelativeLayout>

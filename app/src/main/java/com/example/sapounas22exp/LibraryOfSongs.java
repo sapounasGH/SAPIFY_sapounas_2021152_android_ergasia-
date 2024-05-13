@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.room.Room;
 
+import com.example.sapounas22exp.database.Lhistory;
 import com.example.sapounas22exp.database.MyAppDatabase;
 import com.example.sapounas22exp.database.songs;
 import com.google.android.material.navigation.NavigationView;
@@ -29,15 +30,14 @@ public class LibraryOfSongs extends AppCompatActivity {
 
     LinearLayout lLayout;
     public static com.example.sapounas22exp.database.MyAppDatabase myAppDatabase;
-
-    private DrawerLayout drawerLayout;
     TextView songD;
     final boolean[] voi = {true};
     MediaPlayer mediaPlayer=Mediaplayershare.getInstance();
     public static int playingnow=-1,playnext=-1,maxid=-1,playprevious=-1;
     public TextView liban,libsn;
-    Button getK,getF,get5;
+    Button getK,getF,get5,history;
     List<songs> songsQ2;
+    List<Lhistory> songsQ3;
 
     RelativeLayout lsd;
     @Override
@@ -108,6 +108,7 @@ public class LibraryOfSongs extends AppCompatActivity {
                         liban.setText(SArtistName);
                         ppblib.setImageResource(android.R.drawable.ic_media_pause);
                         voi[0] = false;
+                        saveListenignHistory(i.getId(), SongN, SArtistName, Smp3path);
                     }
                 });
             }
@@ -147,6 +148,7 @@ public class LibraryOfSongs extends AppCompatActivity {
                                 liban.setText(SArtistName);
                                 ppblib.setImageResource(android.R.drawable.ic_media_pause);
                                 voi[0] = false;
+                                saveListenignHistory(i.getId(), SongN, SArtistName, Smp3path);
                             }
                         });
                     }
@@ -185,6 +187,7 @@ public class LibraryOfSongs extends AppCompatActivity {
                                 liban.setText(SArtistName);
                                 ppblib.setImageResource(android.R.drawable.ic_media_pause);
                                 voi[0] = false;
+                                saveListenignHistory(i.getId(), SongN, SArtistName, Smp3path);
                             }
                         });
                     }
@@ -223,6 +226,51 @@ public class LibraryOfSongs extends AppCompatActivity {
                                 liban.setText(SArtistName);
                                 ppblib.setImageResource(android.R.drawable.ic_media_pause);
                                 voi[0] = false;
+                                saveListenignHistory(i.getId(), SongN, SArtistName, Smp3path);
+                            }
+                        });
+                    }
+                }
+            });
+
+            history=findViewById(R.id.history);
+            history.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lLayout.removeAllViews();
+                    songsQ3 = MainActivity.myAppDatabase.myDao().getLhistory();
+                    for (Lhistory i : songsQ3) {
+                        int code = i.getLHid();
+                        if (maxid <= code) {
+                            maxid = code;
+                        }
+                        String SongN = i.getLHsname();
+                        String SArtistName = i.getLHsartist();
+                        String Smp3path = i.getLHmp3filepath();
+                        View view = getLayoutInflater().inflate(R.layout.card, null);
+                        songD = view.findViewById(R.id.txtquery);
+                        songD.setText(String.format("%s\n%s", SongN, SArtistName));
+                        lLayout.addView(view);
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                PlaySong(Smp3path);
+                                playingnow = i.getLHid();
+                                if (playingnow == maxid) {
+                                    playnext = 0;
+                                } else {
+                                    playnext = playingnow + 1;
+                                }
+                                if (playingnow == 0) {
+                                    playprevious = maxid;
+                                } else {
+                                    playprevious = playingnow - 1;
+                                }
+                                libsn.setText(SongN);
+                                liban.setText(SArtistName);
+                                ppblib.setImageResource(android.R.drawable.ic_media_pause);
+                                voi[0] = false;
+                                saveListenignHistory(i.getId(), SongN, SArtistName, Smp3path);
                             }
                         });
                     }
@@ -267,4 +315,15 @@ public class LibraryOfSongs extends AppCompatActivity {
             MainActivity.ppb.setImageResource(android.R.drawable.ic_media_pause);
         }
     }
+    public  void saveListenignHistory(int histid, String SongN, String SArtistName, String Smp3path){
+        /*vazoume to song sto listening histori*/
+        Lhistory histsong = new Lhistory();
+        histsong.setLHid(histid);
+        histsong.setLHsname(SongN);
+        histsong.setLHsartist(SArtistName);
+        histsong.setLHmp3filepath(Smp3path);
+        MainActivity.myAppDatabase.myDao().addLhistory(histsong);
+    }
+
+
 }

@@ -95,6 +95,16 @@
             android:thumbTint="@color/white"
             android:secondaryProgressTint="@color/darkishpurple"
             />
+
+        <ImageButton
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PLayPauseb2"
+            android:layout_marginTop="30dp"
+            android:src="@android:drawable/btn_star_big_off"
+            android:layout_centerHorizontal="true"
+            />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

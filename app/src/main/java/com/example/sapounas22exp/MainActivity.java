@@ -1,15 +1,11 @@
 package com.example.sapounas22exp;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import androidx.activity.EdgeToEdge;
@@ -20,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.room.Room;
 import android.widget.TextView;
 import com.example.sapounas22exp.R.id;
+import com.example.sapounas22exp.database.Lhistory;
 import com.example.sapounas22exp.database.MyAppDatabase;
 import com.example.sapounas22exp.database.songs;
 import com.google.android.material.navigation.NavigationView;
@@ -40,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     public static ImageButton ppb;
 
     private NavigationView navigationView;
-
     public static FirebaseFirestore firestoreDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ppb = findViewById(R.id.PLayPauseb);
         /*edw eiani to Library pou thelw na dhmiourghsw*/
-        myAppDatabase = Room.databaseBuilder(getApplicationContext(), MyAppDatabase.class, "SongDBf").allowMainThreadQueries().build();
+        myAppDatabase = Room.databaseBuilder(getApplicationContext(), MyAppDatabase.class, "SongDBf4").allowMainThreadQueries().build();
         List<songs> songsQ = MainActivity.myAppDatabase.myDao().getsongs();
         lLayout = findViewById(R.id.Library);
         an = findViewById(id.SongArtactivitymain);
@@ -81,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     an.setText(SArtistName);
                     ppb.setImageResource(android.R.drawable.ic_media_pause);
                     voi[0] = false;
+                    saveListenignHistory(i.getId(), SongN, SArtistName, Smp3path);
                 }
             });
         }
@@ -127,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                     if (playingnow==0){
                         playprevious=maxid;
                     }else {playprevious=playingnow-1;}
+                    saveListenignHistory(whattoplay[0].getId(), whattoplay[0].getSname(), whattoplay[0].getSartist(), whattoplay[0].getMp3filepath());
                 }
             }
         });
@@ -150,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                     if (playingnow==0){
                         playprevious=maxid;
                     }else {playprevious=playingnow-1;}
+                    saveListenignHistory(whattoplay[0].getId(), whattoplay[0].getSname(), whattoplay[0].getSartist(), whattoplay[0].getMp3filepath());
                 }
             }
         });
@@ -227,5 +226,16 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         mediaPlayer.start();
+
+    }
+
+    public  void saveListenignHistory(int histid, String SongN, String SArtistName, String Smp3path){
+        /*vazoume to song sto listening histori*/
+        Lhistory histsong = new Lhistory();
+        histsong.setLHid(histid);
+        histsong.setLHsname(SongN);
+        histsong.setLHsartist(SArtistName);
+        histsong.setLHmp3filepath(Smp3path);
+        MainActivity.myAppDatabase.myDao().addLhistory(histsong);
     }
 }

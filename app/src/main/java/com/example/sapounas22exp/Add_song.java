@@ -34,6 +34,8 @@ import androidx.core.content.ContextCompat;
 import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.Fragment;
 
+import com.example.sapounas22exp.database.Lhistory;
+import com.example.sapounas22exp.database.likedsong;
 import com.example.sapounas22exp.database.songs;
 
 
@@ -76,7 +78,7 @@ public class Add_song extends Fragment {
     EditText editText1, editText2, editText3;
     Button submit, delete;
     songs song = new songs();
-
+    likedsong ls = new likedsong();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -109,7 +111,10 @@ public class Add_song extends Fragment {
                 song.setId(songid);
                 song.setSname(songname);
                 song.setSartist(songartist);
+                ls.setLikedid(songid);
+                ls.setLiked(true);
                 MainActivity.myAppDatabase.myDao().addSong(song);
+                MainActivity.myAppDatabase.myDao().addliked(ls);
                 displayNotification("Song Added","Your song has been succesfully added to your Library");
                 editText1.setText("");
                 editText2.setText("");
@@ -128,7 +133,11 @@ public class Add_song extends Fragment {
                 }
                 songs song = new songs();
                 song.setId(Var_songid);
+                Lhistory histsong = new Lhistory();
+                histsong.setLHid(Var_songid);
                 MainActivity.myAppDatabase.myDao().deleteSong(song);
+                MainActivity.myAppDatabase.myDao().deleteLHSong(histsong);
+                MainActivity.myAppDatabase.myDao().deleteLiked(ls);
                 displayNotification("Song Deleted","Your song has been succesfully deleted from your Library");
                 editText1.setText("");
                 editText2.setText("");

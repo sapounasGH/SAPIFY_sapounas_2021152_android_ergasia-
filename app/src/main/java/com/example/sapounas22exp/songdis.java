@@ -14,6 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.sapounas22exp.database.Lhistory;
+import com.example.sapounas22exp.database.likedsong;
 import com.example.sapounas22exp.database.songs;
 
 import java.io.IOException;
@@ -22,10 +24,11 @@ import java.util.List;
 public class songdis extends AppCompatActivity {
 
     MediaPlayer mediaPlayer=Mediaplayershare.getInstance();
-
     SeekBar seekBar;
     Runnable runnable;
     Handler handler;
+    ImageButton likedbutton;
+    boolean flag=false;
     public int playingnow=-1,playnext=-1,maxid=-1,playprev=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class songdis extends AppCompatActivity {
         textViewsongNAME.setText(sn);
         TextView textViewsongARTIST = findViewById(R.id.songA);
         textViewsongARTIST.setText(an);
-
+        likedbutton=findViewById(R.id.like);
         final boolean[] voi = {true};
         final ImageButton ppb = findViewById(R.id.PLayPauseb2);
         ppb.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +119,8 @@ public class songdis extends AppCompatActivity {
                     MainActivity.playingnow=playingnow;
                     MainActivity.playnext=playnext;
                     MainActivity.playprevious=playprev;
+                    saveListenignHistory(whattoplay[0].getId(), whattoplay[0].getSname(), whattoplay[0].getSartist(), whattoplay[0].getMp3filepath());
+                    updatestar();
                 }
             }
         });
@@ -150,6 +155,8 @@ public class songdis extends AppCompatActivity {
                     MainActivity.playingnow=playingnow;
                     MainActivity.playnext=playnext;
                     MainActivity.playprevious=playprev;
+                    saveListenignHistory(whattoplay[0].getId(), whattoplay[0].getSname(), whattoplay[0].getSartist(), whattoplay[0].getMp3filepath());
+                    updatestar();
                 }
             }
         });
@@ -173,6 +180,22 @@ public class songdis extends AppCompatActivity {
             }
         });
         updateSeekbar();
+        List<likedsong> songcheck23 = MainActivity.myAppDatabase.myDao().getlikedsong();
+        updatestar();
+        likedbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (likedsong l : songcheck23 ){
+                    if ((playingnow == l.getLikedid()) && (l.isLiked())) {
+                        likedbutton.setImageResource(android.R.drawable.btn_star_big_off);
+                        MainActivity.myAppDatabase.myDao().updateFLiked(l.getLikedid());
+                    }else if((playingnow == l.getLikedid()) && (!l.isLiked())) {
+                        likedbutton.setImageResource(android.R.drawable.btn_star_big_on);
+                        MainActivity.myAppDatabase.myDao().updateTLiked(l.getLikedid());
+                    }
+                }
+            }
+        });
     }
 
     public void PlaySong(String Smp3path) {
@@ -216,6 +239,23 @@ public class songdis extends AppCompatActivity {
         super.onBackPressed();
         if (mediaPlayer.isPlaying()) {
             MainActivity.ppb.setImageResource(android.R.drawable.ic_media_pause);
+        }
+    }
+    public  void saveListenignHistory(int histid, String SongN, String SArtistName, String Smp3path){
+        /*vazoume to song sto listening histori*/
+        Lhistory histsong = new Lhistory();
+        histsong.setLHid(histid);
+        histsong.setLHsname(SongN);
+        histsong.setLHsartist(SArtistName);
+        histsong.setLHmp3filepath(Smp3path);
+        MainActivity.myAppDatabase.myDao().addLhistory(histsong);
+    }
+    public void updatestar(){
+        List<likedsong> songcheck2 = MainActivity.myAppDatabase.myDao().getlikedsong();
+        for (likedsong l : songcheck2 ){
+            if ((playingnow == l.getLikedid()) && (l.isLiked())) {
+                likedbutton.setImageResource(android.R.drawable.btn_star_big_on);
+            }else if((playingnow == l.getLikedid()) && (!l.isLiked())) {likedbutton.setImageResource(android.R.drawable.btn_star_big_off);}
         }
     }
 }

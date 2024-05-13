@@ -93,6 +93,16 @@
             android:minHeight="3dp"
             android:secondaryProgressTint="@color/darkishpurple"
             android:thumbTint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PLayPauseb2"
+
+            android:layout_marginStart="55dp"
+            android:layout_toEndOf="@+id/prev"
+            android:src="@android:drawable/btn_star_big_off" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
