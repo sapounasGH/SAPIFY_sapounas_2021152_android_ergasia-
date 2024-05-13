@@ -112,7 +112,7 @@ public class Add_song extends Fragment {
                 song.setSname(songname);
                 song.setSartist(songartist);
                 ls.setLikedid(songid);
-                ls.setLiked(true);
+                ls.setLiked(false);
                 MainActivity.myAppDatabase.myDao().addSong(song);
                 MainActivity.myAppDatabase.myDao().addliked(ls);
                 displayNotification("Song Added","Your song has been succesfully added to your Library");
